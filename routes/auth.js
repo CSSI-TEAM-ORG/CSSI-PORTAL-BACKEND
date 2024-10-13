@@ -6,6 +6,7 @@ import { signupConfirmController } from '../controllers/auth/signupConfirmContro
 import { loginController } from '../controllers/auth/loginController.js';
 import { changePasswordController } from '../controllers/auth/changePasswordController.js';
 import { logoutController } from '../controllers/auth/logoutController.js';
+import { getProfileController } from '../controllers/auth/getProfileController.js';
 import {verifyToken}  from "../middlewares/verifyToken.js"
 
 Router.post('/register',studentRegisterController);
@@ -13,5 +14,6 @@ Router.get('/confirm',signupConfirmController);
 Router.post('/login',loginController);
 Router.post('/changePassword',verifyToken,changePasswordController);
 Router.post('/logout',verifyToken,logoutController);
+Router.get('/profile',verifyToken,getProfileController);
 
 export default Router;
