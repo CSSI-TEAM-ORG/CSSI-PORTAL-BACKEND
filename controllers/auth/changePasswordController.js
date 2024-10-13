@@ -1,4 +1,4 @@
-import supabase from '../configs/supabaseClient.js';
+import supabase from '../../configs/supabaseClient.js';
 import bcrypt from 'bcrypt';
 
 const changePasswordController= async(req,res)=>{

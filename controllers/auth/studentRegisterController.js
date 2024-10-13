@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import supabase from '../configs/supabaseClient.js';
+import supabase from '../../configs/supabaseClient.js';
 
 const studentRegisterController = async (req, res) => {
     const {name, rollno, department, email, password, confirm_password} = req.body;
