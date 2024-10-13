@@ -1,5 +1,5 @@
 import jsonwebtoken from "jsonwebtoken";
-import supabase from '../configs/supabaseClient.js';
+import supabase from '../../configs/supabaseClient.js';
 import dotenv from "dotenv"
 dotenv.config();
 
