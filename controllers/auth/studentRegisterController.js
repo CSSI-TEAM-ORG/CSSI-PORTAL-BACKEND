@@ -21,7 +21,7 @@ const studentRegisterController = async (req, res) => {
     .eq('email',email)
     .single();
     if(existing_user){
-        if(existing_user.is_verified=='TRUE'){
+        if(existing_user.is_verified==true){
             return res.status(400).json({ message: 'Verified User already exists.' });
         }
         else{
