@@ -67,6 +67,33 @@ const loginController = async(req,res)=>{
         });
     }
 
+    else if(role=='NGO'){
+        const { data: user, error } = await supabase
+        .from('NGO') 
+        .select('id, email, password')
+        .eq('email', email) 
+        .single();
+        if (error || !user) 
+        return res.status(401).json({ message: 'Invalid credentials' });
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        const token = jsonwebtoken.sign(
+            { id: user.id, email: user.email, role: 'ngo' },
+            process.env.JWT_SECRET,
+            { expiresIn: '30d' }
+        );
+    
+        res.cookie('authToken', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 30 * 24 * 60 * 60 * 1000, 
+            sameSite: 'Lax',
+        });
+    }
     res.status(200).json({ message: 'Login successful' });
 }
 
