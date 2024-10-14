@@ -4,7 +4,7 @@ import supabase from '../../configs/supabaseClient.js';
 const studentRegisterController = async (req, res) => {
     const {name, rollno, department, email, password, confirm_password} = req.body;
 
-    const emailPattern = /^[a-zA-Z0-9._%+-]+\.pdpu\.ac\.in$/;
+    const emailPattern = /^[a-zA-Z0-9.@]+\.pdpu\.ac\.in$/;
     if (!emailPattern.test(email))
     return res.status(400).json({ message: 'Invalid email format.' });
 
@@ -21,7 +21,7 @@ const studentRegisterController = async (req, res) => {
     .eq('email',email)
     .single();
     if(existing_user){
-        if(existing_user.is_verified=='TRUE'){
+        if(existing_user.is_verified==true){
             return res.status(400).json({ message: 'Verified User already exists.' });
         }
         else{
