@@ -36,10 +36,11 @@ const signupConfirmController = async(req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',  
         maxAge: 30 * 24 * 60 * 60 * 1000,  
-        sameSite: 'Lax',  
+        sameSite: 'None',  
+        domain: 'localhost'
     });
 
-    res.status(200).json({ message: 'Email Confirmed successfully and Token added to cookies' });
+    res.redirect('http://localhost:3000/');
 }
 
 export {signupConfirmController}

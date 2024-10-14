@@ -62,7 +62,8 @@ const loginController = async(req,res)=>{
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             maxAge: 30 * 24 * 60 * 60 * 1000, 
-            sameSite: 'Lax',
+            sameSite: 'None',  
+            domain: 'localhost'
         });
     }
 
