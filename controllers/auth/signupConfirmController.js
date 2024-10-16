@@ -35,7 +35,7 @@ const signupConfirmController = async(req, res) => {
     res.cookie('authToken', Token, {
         secure: process.env.NODE_ENV === 'production',  
         maxAge: 30 * 24 * 60 * 60 * 1000,  
-        sameSite: 'Strict',  
+        sameSite: 'Lax',  
     });
 
     res.redirect('http://localhost:3000/');

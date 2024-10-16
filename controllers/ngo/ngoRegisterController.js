@@ -6,10 +6,6 @@ const ngoRegisterController = async (req, res) => {
 
     const {name, email, registeration_no , capacity, state, city, address, password, confirm_password} = req.body;
 
-    // const strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    // if (!strongPasswordPattern.test(password)) 
-    // return res.status(400).json({ message: 'Password Format Invalid.' });
-
     if (password !== confirm_password) 
     return res.status(400).json({ message: 'Passwords do not match.'});
 

@@ -5,6 +5,7 @@ dotenv.config();
 
 import auth from './routes/auth.js';
 import ngo from './routes/ngo.js';
+import admin from './routes/admin.js';
 import corsOptions from './configs/corsOptions.js';
 
 const app = express();
@@ -19,7 +20,8 @@ app.set('views', './views');
 app.use(express.static('./public'));
 
 app.use('/ngo',ngo);
-app.use('/auth', auth);
+app.use('/auth',auth);
+app.use('/admin',admin);
 
 app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
