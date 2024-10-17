@@ -5,10 +5,10 @@ const updateProfileController=  async (req,res)=>{
         const{id, role} =req.user;
 
         if (role == 'NGO') {
-            const {name, capacity, state, city, address} = req.body;
+            const {name,email, capacity, state, city, address} = req.body;
             const { error } = await Supabase
             .from('NGO')
-            .update({name:name, capacity:capacity,state:state, city:city, address:address})
+            .update({name:name,email:email, capacity:capacity,state:state, city:city, address:address})
             .eq('id',id);
 
             if (error) {
@@ -34,6 +34,20 @@ const updateProfileController=  async (req,res)=>{
             const { error } = await Supabase
             .from('faculty')
             .update({name:name, department_id: dept_id})
+            .eq('id',id);
+
+            if (error) {
+                return res.status(500).json({ message: 'Error fetching data from Supabase', error });
+            }
+            
+            return res.status(200).json({message:'Updated Successfully'});
+        }
+        else if (role == 'student') {
+            const {name, rollno,internshipAt} = req.body;
+            
+            const { error } = await Supabase
+            .from('student')
+            .update({name,rollno,NGO:internshipAt})
             .eq('id',id);
 
             if (error) {

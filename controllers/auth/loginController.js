@@ -35,6 +35,8 @@ const loginController = async(req,res)=>{
             maxAge: 30 * 24 * 60 * 60 * 1000, 
             sameSite: 'Lax',
         });
+
+        return res.status(200).json({ message: 'Login successful' });
     }
     
     else if(role=='faculty'){
@@ -63,9 +65,11 @@ const loginController = async(req,res)=>{
             sameSite: 'Lax',  
             domain: 'localhost'
         });
+
+        return res.status(200).json({ message: 'Login successful' });
     }
 
-    else if(role=='NGO'){
+    else if(role=='ngo'){
         const { data: user, error } = await supabase
         .from('NGO') 
         .select('id, email, password')
@@ -80,7 +84,7 @@ const loginController = async(req,res)=>{
         }
 
         const token = jsonwebtoken.sign(
-            { id: user.id, email: user.email, role: 'ngo' },
+            { id: user.id, email: user.email, role: 'NGO' },
             process.env.JWT_SECRET,
             { expiresIn: '30d' }
         );
@@ -90,8 +94,10 @@ const loginController = async(req,res)=>{
             maxAge: 30 * 24 * 60 * 60 * 1000, 
             sameSite: 'Lax',
         });
+
+        return res.status(200).json({ message: 'Login successful' });
     }
-    res.status(200).json({ message: 'Login successful' });
+    res.status(401).json({ message: 'No such Account Exist!' });
 }
 
 export{loginController}
