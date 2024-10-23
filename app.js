@@ -9,7 +9,7 @@ import admin from './routes/admin.js';
 import corsOptions from './configs/corsOptions.js';
 
 const app = express();
-const PORT = process.env.PORT || 5000; 
+const PORT = process.env.PORT || 5000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
