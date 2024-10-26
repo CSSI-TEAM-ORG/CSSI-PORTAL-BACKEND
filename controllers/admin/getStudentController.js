@@ -13,6 +13,10 @@ const getStudentController=async (req, res) => {
             return res.status(500).json({ message: 'Error fetching data from Supabase', error1 });
         }
 
+        if (!Students[0]) {
+            return res.status(404).json({'message':"No Student found"})
+        }
+
         const { data: Department, error2 } = await Supabase
         .from('Department')
         .select('id,name');

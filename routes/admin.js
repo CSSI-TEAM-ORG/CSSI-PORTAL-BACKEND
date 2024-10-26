@@ -15,6 +15,8 @@ import { addNGOController } from '../controllers/admin/addNGOController.js';
 import { deleteUserController } from '../controllers/admin/deleteUserController.js';
 
 import { searchStudentController } from '../controllers/admin/searchStudentController.js';
+import { searchFacultyController } from '../controllers/admin/searchFacultyController.js';
+import { searchNGOController } from '../controllers/admin/searchNGOController.js';
 
 Router.post('/contact',contactAdminController);
 
@@ -29,5 +31,7 @@ Router.post('/addNGO',verifyAdmin,addNGOController);
 Router.delete('/deleteUser',verifyAdmin,deleteUserController);
 
 Router.get('/searchStudent',verifyAdmin,searchStudentController);
+Router.get('/searchFaculty',searchFacultyController);
+Router.get('/searchNGO',searchNGOController);
 
 export default Router;

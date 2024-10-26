@@ -14,6 +14,10 @@ const getFacultyController=async (req, res) => {
             return res.status(500).json({ message: 'Error fetching data from Supabase', error1 });
         }
 
+        if (!Faculty[0]) {
+            return res.status(404).json({'message':"No Faculty found"})
+        }
+        
         const { data: Department, error2 } = await Supabase
         .from('Department')
         .select('id,name');
@@ -32,6 +36,7 @@ const getFacultyController=async (req, res) => {
                 Faculty[index]['department']=department_map[dept_id]
             }
         }
+
         return res.status(200).json(Faculty);
     } catch (err) {
         console.error('Fetch failed due to:', err);
