@@ -31,7 +31,7 @@ Router.post('/addNGO',verifyAdmin,addNGOController);
 Router.delete('/deleteUser',verifyAdmin,deleteUserController);
 
 Router.get('/searchStudent',verifyAdmin,searchStudentController);
-Router.get('/searchFaculty',searchFacultyController);
-Router.get('/searchNGO',searchNGOController);
+Router.get('/searchFaculty',verifyAdmin,searchFacultyController);
+Router.get('/searchNGO',verifyAdmin,searchNGOController);
 
 export default Router;
