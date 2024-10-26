@@ -1,11 +1,6 @@
 import Supabase from '../../configs/supabaseClient.js';
 
 const getFacultyController=async (req, res) => {
-    const{id, role} =req.user;
-
-    if (role != 'admin'){
-        return res.status(401).json({ message: 'Unauthorized access: Access denied' });
-    }
     
     try {
         let { data: Faculty, error1 } = await Supabase

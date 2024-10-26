@@ -2,12 +2,6 @@ import bcrypt from 'bcrypt';
 import supabase from '../../configs/supabaseClient.js';
 
 const addNGOController = async (req, res) => {
-    const{id, role} =req.user;
-
-    if (role != 'admin'){
-        return res.status(401).json({ message: 'Unauthorized access: Access denied' });
-    }
-    
     const {name, capacity, city, state, address, email, password, confirm_password} = req.body;
 
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;

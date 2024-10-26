@@ -2,11 +2,6 @@ import bcrypt from 'bcrypt';
 import supabase from '../../configs/supabaseClient.js';
 
 const addStudentController = async (req, res) => {
-    const{id, role} =req.user;
-
-    if (role != 'admin'){
-        return res.status(401).json({ message: 'Unauthorized access: Access denied' });
-    }
     
     const {name, rollno, department, email, password, confirm_password} = req.body;
 
