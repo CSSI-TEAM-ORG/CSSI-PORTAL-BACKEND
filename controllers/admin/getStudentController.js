@@ -13,15 +13,15 @@ const getStudentController=async (req, res) => {
         .select('id, email, name, rollno, NGO, Department_id')
         .order('rollno', { ascending: true });
 
-
+        // console.log(Students)
         if (error1) {
-            return res.status(500).json({ message: 'Error fetching data from Supabase', error1 });
+            return res.status(500).json({ message: 'Error fetching data from Supabase hi', error1 });
         }
 
         const { data: Department, error2 } = await Supabase
         .from('Department')
         .select('id,name');
-
+        // console.log(error2)
         if (error2) {
             return res.status(500).json({ message: 'Error fetching data from Supabase', error2 });
         }
