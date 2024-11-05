@@ -28,7 +28,7 @@ Router.post('/addStudent',verifyAdmin,addStudentController);
 Router.post('/addFaculty',verifyAdmin,addFacultyController);
 Router.post('/addNGO',verifyAdmin,addNGOController);
 
-Router.delete('/deleteUser',verifyAdmin,deleteUserController);
+Router.post('/deleteUser',verifyAdmin,deleteUserController);
 
 Router.get('/searchStudent',verifyAdmin,searchStudentController);
 Router.get('/searchFaculty',verifyAdmin,searchFacultyController);
