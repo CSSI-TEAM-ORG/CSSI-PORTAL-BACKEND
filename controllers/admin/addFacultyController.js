@@ -3,7 +3,7 @@ import supabase from '../../configs/supabaseClient.js';
 
 const addFacultyController = async (req, res) => {
 
-    const {name, department, email, password, confirm_password} = req.body;
+    const {name, department, email, password, confirm_password} = req.body.data;
 
     const emailPattern = /^[a-zA-Z0-9.@]+\.pdpu\.ac\.in$/;
     if (!emailPattern.test(email))
