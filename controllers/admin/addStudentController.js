@@ -2,8 +2,8 @@ import bcrypt from 'bcrypt';
 import supabase from '../../configs/supabaseClient.js';
 
 const addStudentController = async (req, res) => {
-    
-    const {name, rollno, department, email, password, confirm_password} = req.body;
+    console.log(req.body)
+    const {name, rollno, department, email, password, confirm_password} = req.body.data;
 
     const emailPattern = /^[a-zA-Z0-9.@]+\.pdpu\.ac\.in$/;
     if (!emailPattern.test(email))

@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import supabase from '../../configs/supabaseClient.js';
 
 const addNGOController = async (req, res) => {
-    const {name, capacity, city, state, address, email, password, confirm_password} = req.body;
+    const {name, capacity, city, state, address, email, password, confirm_password} = req.body.data;
 
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(email))
