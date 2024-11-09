@@ -1,7 +1,7 @@
 import express from 'express';
 const Router = express.Router();
 
-import { studentRegisterController } from '../controllers/auth/studentRegisterController.js';
+import { ngoRegisterController } from '../controllers/auth/ngoRegisterController.js';
 import { signupConfirmController } from '../controllers/auth/signupConfirmController.js';
 import { loginController } from '../controllers/auth/loginController.js';
 import { changePasswordController } from '../controllers/auth/changePasswordController.js';
@@ -10,7 +10,7 @@ import { getProfileController } from '../controllers/auth/getProfileController.j
 import { updateProfileController } from '../controllers/auth/updateProfileController.js';
 import {verifyToken}  from "../middlewares/verifyToken.js"
 
-Router.post('/register',studentRegisterController);
+Router.post('/register',ngoRegisterController);
 Router.get('/confirm',signupConfirmController);
 Router.post('/login',loginController);
 Router.post('/changePassword',verifyToken,changePasswordController);

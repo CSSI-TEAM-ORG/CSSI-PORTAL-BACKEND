@@ -18,7 +18,7 @@ const signupConfirmController = async(req, res) => {
     }
 
     const {data:updated_user, error: updateError } = await supabase
-    .from('student')
+    .from('NGO')
     .update({ is_verified: true })
     .eq('email', user.user.email)
     .select();
@@ -27,7 +27,7 @@ const signupConfirmController = async(req, res) => {
     }
 
     const Token = jsonwebtoken.sign(
-        { id: updated_user[0].id, email:updated_user[0].email, role: 'student' },
+        { id: updated_user[0].id, email:updated_user[0].email, role: 'ngo' },
         process.env.JWT_SECRET,
         { expiresIn: '30d' }
     );
@@ -38,7 +38,7 @@ const signupConfirmController = async(req, res) => {
         sameSite: 'Lax',  
     });
 
-    res.redirect('http://localhost:3000/');
+    res.redirect('http://localhost:3000/ngo/dashboard');
 }
 
 export {signupConfirmController}

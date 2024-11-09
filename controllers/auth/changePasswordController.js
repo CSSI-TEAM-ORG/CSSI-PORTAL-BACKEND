@@ -20,7 +20,7 @@ const changePasswordController= async(req,res)=>{
 
     const strongPasswordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!strongPasswordPattern.test(new_password)) 
-    return res.status(400).json({ message: 'Password Format Invalid.' });
+    return res.status(400).json({ message: 'Weak Password!' });
 
     const hashedPassword = await bcrypt.hash(new_password, 10);
 
