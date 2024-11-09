@@ -1,25 +1,25 @@
 import Supabase from '../../configs/supabaseClient.js';
 
-const searchFacultyController = async(req, res) => {
+const searchFacultyController = async (req, res) => {
     try {
-        const {keyword} = req.query.data;
+        const { keyword } = req.query.data;
         let { data: Faculty, error1 } = await Supabase
-        .from('faculty')
-        .select('id, email, name, department_id')
-        .order('department_id', { ascending: true })
-        .order('name',{ ascending: true });
-        
+            .from('faculty')
+            .select('id, email, name, department_id')
+            .order('department_id', { ascending: true })
+            .order('name', { ascending: true });
+
         if (error1) {
             return res.status(500).json({ message: 'Error fetching data from Supabase', error1 });
         }
 
         if (!Faculty) {
-            return res.status(404).json({ message: 'No Faculty found.'});
+            return res.status(404).json({ message: 'No Faculty found.' });
         }
 
         const { data: Department, error2 } = await Supabase
-        .from('Department')
-        .select('id,name');
+            .from('Department')
+            .select('id,name');
 
         if (error2) {
             return res.status(500).json({ message: 'Error fetching data from Supabase', error2 });
@@ -31,12 +31,12 @@ const searchFacultyController = async(req, res) => {
 
         for (let index = 0; index < Faculty.length; index++) {
             let dept_id = Faculty[index]['department_id'];
-            if(department_map[dept_id]){
-                Faculty[index]['department']=department_map[dept_id]
+            if (department_map[dept_id]) {
+                Faculty[index]['department'] = department_map[dept_id]
             }
         }
 
-        const keywords = keyword.split(" "); 
+        const keywords = keyword.split(" ");
         let filtered_faculty = []
         keywords.forEach(key_w => {
             let regex_keyword = new RegExp(String(key_w), 'i');
@@ -48,9 +48,9 @@ const searchFacultyController = async(req, res) => {
                 }
             });
         });
-        
+
         if (!filtered_faculty[0]) {
-            return res.status(404).json({'message':"No Faculty found"})
+            return res.status(404).json({ 'message': "No Faculty found" })
         }
         return res.status(200).json(filtered_faculty);
     } catch (err) {
@@ -59,4 +59,4 @@ const searchFacultyController = async(req, res) => {
     }
 }
 
-export {searchFacultyController}
+export { searchFacultyController }

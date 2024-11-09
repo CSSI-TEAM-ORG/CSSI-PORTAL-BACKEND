@@ -1,13 +1,13 @@
 import Supabase from '../../configs/supabaseClient.js';
 
-const getFacultyController=async (req, res) => {
-    
+const getFacultyController = async (req, res) => {
+
     try {
         let { data: Faculty, error1 } = await Supabase
-        .from('faculty')
-        .select('id, email, name, department_id')
-        .order('department_id', { ascending: true })
-        .order('name',{ ascending: true });
+            .from('faculty')
+            .select('id, email, name, department_id')
+            .order('department_id', { ascending: true })
+            .order('name', { ascending: true });
 
 
         if (error1) {
@@ -15,12 +15,12 @@ const getFacultyController=async (req, res) => {
         }
 
         if (!Faculty[0]) {
-            return res.status(404).json({'message':"No Faculty found"})
+            return res.status(404).json({ 'message': "No Faculty found" })
         }
-        
+
         const { data: Department, error2 } = await Supabase
-        .from('Department')
-        .select('id,name');
+            .from('Department')
+            .select('id,name');
 
         if (error2) {
             return res.status(500).json({ message: 'Error fetching data from Supabase', error2 });
@@ -32,8 +32,8 @@ const getFacultyController=async (req, res) => {
 
         for (let index = 0; index < Faculty.length; index++) {
             let dept_id = Faculty[index]['department_id'];
-            if(department_map[dept_id]){
-                Faculty[index]['department']=department_map[dept_id]
+            if (department_map[dept_id]) {
+                Faculty[index]['department'] = department_map[dept_id]
             }
         }
 
@@ -44,4 +44,4 @@ const getFacultyController=async (req, res) => {
     }
 }
 
-export {getFacultyController}
+export { getFacultyController }

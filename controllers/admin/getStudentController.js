@@ -1,12 +1,12 @@
 import Supabase from '../../configs/supabaseClient.js';
 
-const getStudentController=async (req, res) => {
-    
+const getStudentController = async (req, res) => {
+
     try {
         let { data: Students, error1 } = await Supabase
-        .from('student')
-        .select('id, email, name, rollno, NGO, Department_id')
-        .order('rollno', { ascending: true });
+            .from('student')
+            .select('id, email, name, rollno, NGO, Department_id')
+            .order('rollno', { ascending: true });
 
 
         if (error1) {
@@ -14,12 +14,12 @@ const getStudentController=async (req, res) => {
         }
 
         if (!Students[0]) {
-            return res.status(404).json({'message':"No Student found"})
+            return res.status(404).json({ 'message': "No Student found" })
         }
 
         const { data: Department, error2 } = await Supabase
-        .from('Department')
-        .select('id,name');
+            .from('Department')
+            .select('id,name');
 
         if (error2) {
             return res.status(500).json({ message: 'Error fetching data from Supabase', error2 });
@@ -31,8 +31,8 @@ const getStudentController=async (req, res) => {
 
         for (let index = 0; index < Students.length; index++) {
             let dept_id = Students[index]['Department_id'];
-            if(department_map[dept_id]){
-                Students[index]['Department']=department_map[dept_id]
+            if (department_map[dept_id]) {
+                Students[index]['Department'] = department_map[dept_id]
             }
         }
         return res.status(200).json(Students);
@@ -42,4 +42,4 @@ const getStudentController=async (req, res) => {
     }
 }
 
-export {getStudentController}
+export { getStudentController }

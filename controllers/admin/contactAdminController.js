@@ -27,7 +27,7 @@ const contactAdminController = async (req, res) => {
 
     const mailData1 = {
         from: `CSSI <${process.env.EMAIL_ID}>`,
-        to: adminEmails,  
+        to: adminEmails,
         subject: `New Query from ${name}`,
         html: `
             <h3>New Query Received</h3>
@@ -41,7 +41,7 @@ const contactAdminController = async (req, res) => {
 
     const mailData2 = {
         from: `CSSI <${process.env.EMAIL_ID}>`,
-        to: email,  
+        to: email,
         subject: 'Query Submission Confirmation',
         html: `
             <h3>Thank You for Contacting Us!</h3>

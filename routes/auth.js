@@ -8,14 +8,14 @@ import { changePasswordController } from '../controllers/auth/changePasswordCont
 import { logoutController } from '../controllers/auth/logoutController.js';
 import { getProfileController } from '../controllers/auth/getProfileController.js';
 import { updateProfileController } from '../controllers/auth/updateProfileController.js';
-import {verifyToken}  from "../middlewares/verifyToken.js"
+import { verifyToken } from "../middlewares/verifyToken.js"
 
-Router.post('/register',ngoRegisterController);
-Router.get('/confirm',signupConfirmController);
-Router.post('/login',loginController);
-Router.post('/changePassword',verifyToken,changePasswordController);
-Router.post('/logout',verifyToken,logoutController);
-Router.get('/profile',verifyToken,getProfileController);
-Router.post('/updateprofile',verifyToken, updateProfileController);
+Router.post('/register', ngoRegisterController);
+Router.get('/confirm', signupConfirmController);
+Router.post('/login', loginController);
+Router.post('/changePassword', verifyToken, changePasswordController);
+Router.post('/logout', verifyToken, logoutController);
+Router.get('/profile', verifyToken, getProfileController);
+Router.post('/updateprofile', verifyToken, updateProfileController);
 
 export default Router;

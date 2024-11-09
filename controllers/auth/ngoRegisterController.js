@@ -44,11 +44,11 @@ const ngoRegisterController = async (req, res) => {
     const { error: insert_error } = await supabase
         .from('NGO')
         .insert({
-            name, 
-            capacity, 
-            state, 
-            city, 
-            address, 
+            name,
+            capacity,
+            state,
+            city,
+            address,
             email,
             password: hashedPassword,
         });

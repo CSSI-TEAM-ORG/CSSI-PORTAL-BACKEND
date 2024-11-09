@@ -18,20 +18,20 @@ import { searchStudentController } from '../controllers/admin/searchStudentContr
 import { searchFacultyController } from '../controllers/admin/searchFacultyController.js';
 import { searchNGOController } from '../controllers/admin/searchNGOController.js';
 
-Router.post('/contact',contactAdminController);
+Router.post('/contact', contactAdminController);
 
-Router.get('/getStudent',verifyAdmin,getStudentController);
-Router.get('/getFaculty',verifyAdmin,getFacultyController);
-Router.get('/getNGO',verifyAdmin,getNGOController);
+Router.get('/getStudent', verifyAdmin, getStudentController);
+Router.get('/getFaculty', verifyAdmin, getFacultyController);
+Router.get('/getNGO', verifyAdmin, getNGOController);
 
-Router.post('/addStudent',verifyAdmin,addStudentController);
-Router.post('/addFaculty',verifyAdmin,addFacultyController);
-Router.post('/addNGO',verifyAdmin,addNGOController);
+Router.post('/addStudent', verifyAdmin, addStudentController);
+Router.post('/addFaculty', verifyAdmin, addFacultyController);
+Router.post('/addNGO', verifyAdmin, addNGOController);
 
-Router.post('/deleteUser',verifyAdmin,deleteUserController);
+Router.post('/deleteUser', verifyAdmin, deleteUserController);
 
-Router.get('/searchStudent',verifyAdmin,searchStudentController);
-Router.get('/searchFaculty',verifyAdmin,searchFacultyController);
-Router.get('/searchNGO',verifyAdmin,searchNGOController);
+Router.get('/searchStudent', verifyAdmin, searchStudentController);
+Router.get('/searchFaculty', verifyAdmin, searchFacultyController);
+Router.get('/searchNGO', verifyAdmin, searchNGOController);
 
 export default Router;

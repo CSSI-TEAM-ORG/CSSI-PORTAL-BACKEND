@@ -1,4 +1,4 @@
-const logoutController=(req,res)=> {
+const logoutController = (req, res) => {
     res.clearCookie('authToken', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
@@ -7,4 +7,4 @@ const logoutController=(req,res)=> {
     res.status(200).json({ message: 'Logout successful' });
 }
 
-export {logoutController}
+export { logoutController }
