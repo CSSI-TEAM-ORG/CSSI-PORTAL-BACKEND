@@ -36,6 +36,7 @@ const addNGOController = async (req, res) => {
         address,
         email,
         password: hashedPassword,
+        is_verified:true
     });
     if (insert_error)
     return res.status(500).json({ message: 'Error inserting data into database: ' + insert_error.message });
