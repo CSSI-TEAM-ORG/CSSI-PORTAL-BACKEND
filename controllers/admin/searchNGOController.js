@@ -2,7 +2,8 @@ import Supabase from '../../configs/supabaseClient.js';
 
 const searchNGOController = async (req, res) => {
     try {
-        const { keyword } = req.query.data;
+        const keyword = req.query.data;
+
         let { data: NGO, error1 } = await Supabase
             .from('NGO')
             .select('id, email, name, capacity, state, city, address')
