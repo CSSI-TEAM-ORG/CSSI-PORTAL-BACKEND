@@ -4,7 +4,7 @@ const getAllDataController=async (req, res) => {
     try {
         const { data: NGO, error } = await Supabase
         .from('NGO')
-        .select('id,email,name,capacity,state,city,address');
+        .select('id,email,name,capacity,state,city,address,is_verified');
 
         if (error) {
             return res.status(500).json({ message: 'Error fetching data from Supabase', error });
@@ -12,7 +12,7 @@ const getAllDataController=async (req, res) => {
         let filtered_NGO = []
         
         NGO.forEach(ngo => {
-            if(ngo['name']!=null && ngo['city']!=null){
+            if(ngo['name']!=null && ngo['city']!=null && ngo['is_verified']==true){ //Student can apply in only verified ngos
                 filtered_NGO.push(ngo)
             }
         });
