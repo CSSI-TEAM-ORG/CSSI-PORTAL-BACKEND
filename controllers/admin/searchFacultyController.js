@@ -2,7 +2,7 @@ import Supabase from '../../configs/supabaseClient.js';
 
 const searchFacultyController = async (req, res) => {
     try {
-        const { keyword } = req.query.data;
+        const keyword = req.query.data;
         let { data: Faculty, error1 } = await Supabase
             .from('faculty')
             .select('id, email, name, department_id')

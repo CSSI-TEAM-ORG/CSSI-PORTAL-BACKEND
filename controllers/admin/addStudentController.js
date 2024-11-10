@@ -55,7 +55,6 @@ const addStudentController = async (req, res) => {
             email,
             password: hashedPassword,
             Department_id: dept_id,
-            is_verified: true
         });
     if (insert_error)
         return res.status(500).json({ message: 'Error inserting data into database: ' + insert_error.message });

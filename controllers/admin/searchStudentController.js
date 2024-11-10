@@ -2,10 +2,11 @@ import Supabase from '../../configs/supabaseClient.js';
 
 const searchStudentController = async (req, res) => {
     try {
-        const { keyword } = req.query.data;
+        const keyword  = req.query.data;
+
         let { data: Students, error1 } = await Supabase
             .from('student')
-            .select('id, email, name, rollno, NGO, Department_id')
+            .select('id, email, name, rollno, Department_id')
             .order('rollno', { ascending: true });
 
         if (error1) {
