@@ -10,7 +10,7 @@ const loginController = async (req, res) => {
     if (role == 'student') {
         const { data: user, error } = await supabase
             .from('student')
-            .select('id, email, password, is_verified')
+            .select('id, email, password')
             .eq('email', email)
             .single();
         if (error || !user)
