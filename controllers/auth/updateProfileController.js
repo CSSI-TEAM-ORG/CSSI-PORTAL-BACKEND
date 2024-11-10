@@ -43,11 +43,11 @@ const updateProfileController = async (req, res) => {
             return res.status(200).json({ message: 'Updated Successfully' });
         }
         else if (role == 'student') {
-            const { name, rollno, internshipAt } = req.body;
+            const { name, rollno } = req.body;
 
             const { error } = await Supabase
                 .from('student')
-                .update({ name, rollno, NGO: internshipAt })
+                .update({ name, rollno})
                 .eq('id', id);
 
             if (error) {
