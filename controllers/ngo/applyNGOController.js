@@ -15,9 +15,9 @@ const applyNGOController= async(req,res)=>{
     if(error){
         return res.status(501).json({message:"Error fetching data from supabase",error});
     }
-    console.log(stud[0].id)
-    // console.log(stud); supabase ke table me ek field add karni hai depicting student has applied for which NGO internship. 
-    //student can apply only once for each NGO. if field have_applied is null then update it here to corr NGO id.
+    if(stud[0].NGO){
+        return res.status(400).json({message:"You have already been assigned a NGO!!!"})
+    }
     if(stud[0].have_applied && stud[0].have_applied ==req.body.internship.id){
         return res.status(400).json({message:"You have already applied to this NGO."})
     }
@@ -27,9 +27,6 @@ const applyNGOController= async(req,res)=>{
         .upsert({ id:stud[0].id, have_applied: req.body.internship.id},{onConflict:"handle"})
         .select()
         console.log(stup)
-    }
-    if(stud[0].NGO != null){
-        return res.status(400).json({message:"You have already been assigned a NGO!!!"})
     }
     return res.status(200).json({message:"successfully applied!!"})
 }
