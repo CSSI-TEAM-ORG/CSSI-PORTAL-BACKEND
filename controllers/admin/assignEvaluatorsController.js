@@ -24,17 +24,17 @@ const assignEvaluatorsController = async (req, res) => {
         const facultyCount = faculties.length;
         const maxStudentsPerFaculty = Math.ceil(studentCount / facultyCount);
 
-        const assigned = new Array(studentCount).fill(false);
         const facultyAssignmentCount = new Array(facultyCount).fill(0);
 
         const assignments = [];
 
+        let j = facultyCount - 1
         for (let i = 0; i < studentCount; i++) {
             const student = students[i];
             let assignedToFaculty = false;
 
 
-            for (let j = facultyCount - 1; j >= 0; j--) {
+            for (j = j % facultyCount; j >= 0; j--) {
                 const faculty = faculties[j];
 
 
@@ -42,9 +42,10 @@ const assignEvaluatorsController = async (req, res) => {
                     assignments.push({
                         student_id: student.id,
                         faculty_id: faculty.id,
+                        student_department_id: student.Department_id,
+                        faculty_department_id: faculty.department_id,
                     });
 
-                    assigned[i] = true;
                     facultyAssignmentCount[j]++;
                     assignedToFaculty = true;
 
@@ -60,16 +61,24 @@ const assignEvaluatorsController = async (req, res) => {
         if (assignments.length > 0) {
             console.log(`Inserting ${assignments.length} assignments into the database...`);
 
-            const { error: insertError } = await Supabase
+            const { data: assignedStudents, error: insertError } = await Supabase
                 .from('faculty_student_evaluator')
-                .upsert(assignments, { onConflict: ['faculty_id', 'student_id'] });
+                .upsert(assignments, { onConflict: ['faculty_id', 'student_id'] })
+                .select();
 
             if (insertError) {
                 console.error('Error inserting assignments:', insertError);
                 throw new Error(`Error inserting assignments: ${insertError.message}`);
             }
 
-            return res.status(200).json({ message: 'Assignments completed successfully' });
+            const { data, error } = await Supabase.rpc('get_student_faculty_assignments');
+
+            if (error) {
+                console.error('Error fetching data:', error);
+                return res.status(500).json({ error: error.message });
+            }
+
+            return res.status(200).json(data);
         } else {
             console.log('No valid assignments were made.');
             return res.status(400).json({ message: 'No valid assignments were made.' });
