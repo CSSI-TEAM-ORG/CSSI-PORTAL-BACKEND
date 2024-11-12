@@ -7,6 +7,7 @@ import auth from './routes/auth.js';
 import ngo from './routes/ngo.js';
 import admin from './routes/admin.js';
 import faculty from './routes/faculty.js';
+import media from './routes/media.js';
 import corsOptions from './configs/corsOptions.js';
 
 const app = express();
@@ -24,6 +25,7 @@ app.use('/ngo', ngo);
 app.use('/faculty', faculty);
 app.use('/auth', auth);
 app.use('/admin', admin);
+app.use('/media', media);
 
 app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
