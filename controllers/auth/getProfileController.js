@@ -15,7 +15,7 @@ const getProfileController = async (req, res) => {
 
         if (profile.length > 0) {
             let dept_name = null;
-            if (role != "NGO") {
+            if (role == "student" || role=="faculty" ) {
                 const department_id = role == 'student' ? profile[0].Department_id : profile[0].department_id;
 
                 const { data: deptData, error: deptError } = await Supabase

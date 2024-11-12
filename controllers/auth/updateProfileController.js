@@ -57,6 +57,21 @@ const updateProfileController = async (req, res) => {
             return res.status(200).json({ message: 'Updated Successfully' });
         }
 
+        else if (role == 'admin') {
+            const { name, email, phone } = req.body;
+
+            const { error } = await Supabase
+                .from('admin')
+                .update({ name, email,phone})
+                .eq('id', id);
+
+            if (error) {
+                return res.status(500).json({ message: 'Error fetching data from Supabase', error });
+            }
+
+            return res.status(200).json({ message: 'Updated Successfully' });
+        }
+
         return res.status(400).json({ message: 'Role not found.' });
     } catch (err) {
         console.error('Fetch failed due to:', err);
